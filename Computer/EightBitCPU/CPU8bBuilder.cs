@@ -1,4 +1,4 @@
-﻿using Computer.Components.Helpers;
+﻿using Computer.Helpers;
 using Computer.EightBitCPU;
 using Computer.Interfaces;
 using System.Collections.Generic;
