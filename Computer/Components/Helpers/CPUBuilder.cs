@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Computer.Components.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,10 +10,11 @@ namespace Computer.Components.Helpers
     /// </summary>
     public abstract class CPUBuilder
     {
-        protected VonNeumannCPU cpu { get; }
+        protected IVonNeumannCPU cpu { get; }
 
         public abstract void BuildControlUnit();
         public abstract void BuildInstructionSet();
         public abstract void BuildALU();
+        public abstract void BuildProgramCounter();
     }   
 }

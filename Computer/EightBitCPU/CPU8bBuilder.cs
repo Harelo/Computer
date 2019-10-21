@@ -12,5 +12,7 @@ namespace Computer.Components.EightBitCPU
         public override void BuildControlUnit() => cpu.controlUnit = new ControlUnit8b();
 
         public override void BuildInstructionSet() => cpu.instructionSet = new Dictionary<string, IInstruction>();
+
+        public override void BuildProgramCounter() => cpu.programCounter = new ProgramCounter8b();
     }
 }
