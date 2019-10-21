@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Computer.Components.Helpers
 {
+    /// <summary>
+    /// A class whose purpose is to present the structure for building von neumann cpus
+    /// </summary>
     public abstract class CPUBuilder
     {
         protected VonNeumannCPU cpu { get; }

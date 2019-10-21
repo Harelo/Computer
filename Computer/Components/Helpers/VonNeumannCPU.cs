@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Computer.Components.Helpers
 {
+    /// <summary>
+    /// For Von Neumann architacture based CPUs
+    /// </summary>
     public class VonNeumannCPU : ICPU
     {
         public IControlUnit controlUnit { get; set; }
