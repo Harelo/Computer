@@ -12,9 +12,14 @@ namespace Computer.Components
         private BitArray bits { get; set; }
 
         /// <summary>
-        /// The bus with to which the register will output when enable is on
+        /// The bus from which the register will receive data when enable is on
         /// </summary>
-        public BitArray cpuBus { get; set; }
+        public BitArray inputBus { get; set; }
+
+        /// <summary>
+        /// The bus to which the register will output values when set is on
+        /// </summary>
+        public BitArray outputBus { get; set; }
 
         /// <summary>
         /// An indexer for the register
@@ -40,7 +45,7 @@ namespace Computer.Components
             {
                 _enable = value;
                 if (value)
-                    cpuBus = bits;
+                    outputBus = bits;
             }
             get => _enable;
         }
@@ -54,7 +59,7 @@ namespace Computer.Components
             {
                 _set = value;
                 if (value)
-                    bits = cpuBus;
+                    bits = inputBus;
             }
             get => _set;
         }
@@ -71,58 +76,72 @@ namespace Computer.Components
         public int Count => bits.Count;
 
         /// <summary>
-        /// Construct a register with <paramref name="bitAmount"></paramref> amount of bits
+        /// Construct a register with a specific amount of bits
         /// </summary>
         /// <param name="bitAmount">The amount of bits the register will have</param>
-        public Register(int bitAmount, BitArray _cpuBus)
+        public Register(int bitAmount, BitArray _inputBus, BitArray _outputBus)
         {
             bits = new BitArray(bitAmount);
 
             for (int i = 0; i < bitAmount; i++)
                 bits[i] = false;
 
-            cpuBus = _cpuBus;
-
+            setBuses(_inputBus, _outputBus);
         }
 
         /// <summary>
-        /// Construct a register with existing BitArray
+        /// Construct a register with an existing BitArray
         /// </summary>
         /// <param name="bitArray"></param>
-        public Register(BitArray bitArray, BitArray _cpuBus)
+        public Register(BitArray bitArray, BitArray _inputBus, BitArray _outputBus)
         {
             bits = bitArray;
+            setBuses(_inputBus, _outputBus);
         }
 
-        private Register() { }
-
-        private Register(BitArray bitArray)
+        /// <summary>
+        /// Construct a register from an existing byte array
+        /// </summary>
+        /// <param name="bitArray"></param>
+        public Register(byte[] bitArray, BitArray _inputBus, BitArray _outputBus)
         {
-            bits = bitArray;
+            bits = new BitArray(bitArray);
+            setBuses(_inputBus, _outputBus);
         }
 
-        //Options for setting the value of the register
-
-        public void SetValue(byte[] binaryNumber)
+        /// <summary>
+        /// Setting buses for the register
+        /// </summary>
+        /// <param name="_inputBus"></param>
+        /// <param name="_outputBus"></param>
+        private void setBuses(BitArray _inputBus, BitArray _outputBus)
         {
-            bits = new BitArray(binaryNumber);
+            inputBus = _inputBus;
+            outputBus = _outputBus;
         }
 
-        public void SetValue(int binaryNumber)
-        {
-            bits = new BitArray(new[] { binaryNumber });
-        }
+        ////Options for setting the value of the register
 
-        public void SetValue(long binaryNumber)
-        {
-            byte[] bytes = BitConverter.GetBytes(binaryNumber);
-            bits = new BitArray(bytes);
-        }
+        //public void SetValue(byte[] binaryNumber)
+        //{
+        //    bits = new BitArray(binaryNumber);
+        //}
 
-        public void SetValue(BitArray binaryNumber)
-        {
-            bits = binaryNumber;
-        }
+        //public void SetValue(int binaryNumber)
+        //{
+        //    bits = new BitArray(new[] { binaryNumber });
+        //}
+
+        //public void SetValue(long binaryNumber)
+        //{
+        //    byte[] bytes = BitConverter.GetBytes(binaryNumber);
+        //    bits = new BitArray(bytes);
+        //}
+
+        //public void SetValue(BitArray binaryNumber)
+        //{
+        //    bits = binaryNumber;
+        //}
 
         //public static implicit operator Register(byte[] binaryNumber)
         //{

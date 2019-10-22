@@ -21,13 +21,13 @@ namespace Computer.EightBitCPU
         /// </summary>
         /// <param name="registerAddress">The address of the register</param>
         /// <param name="value">The value to which to set the enable wire</param>
-        public void enable(int registerAddress, bool value) => cpu.registers[registerAddress].enable = value;
+        public void enable(int registerAddress, bool value) => cpu.registers[registerAddress].enableToBus = value;
 
         /// <summary>
         /// Setting the set wire of a register to either on or off
         /// </summary>
         /// <param name="registerAddress">The address of the register</param>
         /// <param name="value">The value to which to set the set wire</param>
-        public void set(int registerAddress, bool value) => cpu.registers[registerAddress].set = value;
+        public void set(int registerAddress, bool value) => cpu.registers[registerAddress].setFromBus = value;
     }
 }

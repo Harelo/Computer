@@ -11,13 +11,13 @@ namespace Computer.EightBitCPU
         public BitArray CurrentAddress
         {
             get => cpuBus;
-            set => currentAddressRegister.set = true;
+            set => currentAddressRegister.setFromBus = true;
         }
 
         public ProgramCounter8b(BitArray _cpuBus, VonNeumannCPU cpu) : base(cpu)
         {
             cpuBus = _cpuBus;
-            currentAddressRegister = new Register(8);
+            currentAddressRegister = new Register(8, cpuBus, cpuBus);
         }
     }
 }

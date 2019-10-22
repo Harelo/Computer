@@ -32,7 +32,7 @@ namespace Computer.EightBitCPU
         {
             cpuBus = _cpuBus;
             flags = new BitArray(4, false);
-            InputB = new Register(8, cpuBus);
+            InputB = new Register(8, cpuBus, output);
         }
 
         //Operations the ALU can perform
@@ -49,7 +49,8 @@ namespace Computer.EightBitCPU
         //The set wire, setting the alu's register to the output of it
         public void set()
         {
-            aluRegister.SetValue(output);
+            cpuBus = output;
+            aluRegister.setFromBus = true;
         }
 
         //The enable wire, enabling the alu register to send its value along the cpu bus
