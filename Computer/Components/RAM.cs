@@ -19,10 +19,9 @@ namespace Computer.Components
         public RAM(int initialSize)
         {
             addreses = new Dictionary<int, BitArray>();
-            BitArray defaultValue = new BitArray(new[] { 0 });
 
             for (int i = 0; i < initialSize; i++)
-                addreses[i] = defaultValue;
+                addreses[i] = new BitArray(8, false);
         }
 
         /// <summary>

@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Computer.Interfaces
 {
-    public interface IControlUnit
+    public interface IProgramCounter
     {
-
     }
 }

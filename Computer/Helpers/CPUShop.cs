@@ -1,4 +1,4 @@
-﻿using Computer.Components.Interfaces;
+﻿using Computer.Components;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,11 +10,14 @@ namespace Computer.Helpers
     /// </summary>
     public class CPUShop
     {
-        public IVonNeumannCPU Construct(CPUBuilder builder)
+        public VonNeumannCPU Construct(CPUBuilder builder)
         {
+            builder.BuildCPUBus();
             builder.BuildALU();
             builder.BuildControlUnit();
             builder.BuildInstructionSet();
+            builder.BuildProgramCounter();
+            builder.BuildRegisters();
 
             return builder.cpu;
         }

@@ -20,13 +20,16 @@ namespace Computer.Components
         }
 
         /// <summary>
-        /// Property for the bits field
+        /// Allows getting a value from the register
         /// </summary>
-        public BitArray Value
-        {
-            get => bits;
-            set => bits = value;
-        }
+        /// <returns></returns>
+        public BitArray enable() => bits;
+
+        /// <summary>
+        /// Allows setting a value in the register
+        /// </summary>
+        /// <param name="data"></param>
+        public void set(BitArray data) => bits = data;
 
         /// <summary>
         /// Returns the amount of bits the register has

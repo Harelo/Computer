@@ -1,18 +1,28 @@
 ﻿using Computer.Helpers;
-using Computer.EightBitCPU;
 using Computer.Interfaces;
 using System.Collections.Generic;
+using Computer.Components;
+using System.Collections;
 
-namespace Computer.Components.EightBitCPU
+namespace Computer.EightBitCPU
 {
-    public class CPU8bBuilder : CPUBuilder
+    public partial class CPU8bBuilder : CPUBuilder
     {
-        public override void BuildALU() => cpu.alu = new ALU8b();
+        public CPU8bBuilder()
+        {
+            cpu = new VonNeumannCPU();
+        }
 
-        public override void BuildControlUnit() => cpu.controlUnit = new ControlUnit8b();
+        public override void BuildALU() => cpu.alu = new ALU8b(cpu.cpuBus);
+
+        public override void BuildControlUnit() => cpu.controlUnit = new ControlUnit8b(cpu);
 
         public override void BuildInstructionSet() => cpu.instructionSet = new Dictionary<string, IInstruction>();
 
-        public override void BuildProgramCounter() => cpu.programCounter = new ProgramCounter8b();
+        public override void BuildProgramCounter() => cpu.programCounter = new ProgramCounter8b(cpu.cpuBus);
+
+        public override void BuildRegisters() => cpu.registers = new Dictionary<int, Register>();
+
+        public override void BuildCPUBus() => cpu.cpuBus = new BitArray(8, false);
     }
 }

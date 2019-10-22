@@ -29,7 +29,7 @@ namespace Computer.EightBitCPU.Instructions
                 cin[i + 1] = carry1[i] | carry2[i];
             }
 
-            var xor2 = new BitArray(xor1).Xor(cin); //Second XOR which outputs the result
+            var xor2 = new BitArray(xor1).Xor(cin); //Second XOR which cpuBuss the result
 
             return xor2;
         }
