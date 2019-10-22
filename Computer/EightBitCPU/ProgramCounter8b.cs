@@ -4,19 +4,17 @@ using System.Collections;
 
 namespace Computer.EightBitCPU
 {
-    public class ProgramCounter8b : IProgramCounter
+    public class ProgramCounter8b : CPUComponent, IProgramCounter
     {
-        private BitArray cpuBus;
-
         private Register currentAddressRegister;
 
         public BitArray CurrentAddress
         {
-            get => currentAddressRegister.enable();
-            set => currentAddressRegister.set(value);
+            get => cpuBus;
+            set => currentAddressRegister.set = true;
         }
 
-        public ProgramCounter8b(BitArray _cpuBus)
+        public ProgramCounter8b(BitArray _cpuBus, VonNeumannCPU cpu) : base(cpu)
         {
             cpuBus = _cpuBus;
             currentAddressRegister = new Register(8);

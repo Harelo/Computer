@@ -13,13 +13,13 @@ namespace Computer.EightBitCPU
             cpu = new VonNeumannCPU();
         }
 
-        public override void BuildALU() => cpu.alu = new ALU8b(cpu.cpuBus);
+        public override void BuildALU() => cpu.alu = new ALU8b(cpu.cpuBus, cpu);
 
         public override void BuildControlUnit() => cpu.controlUnit = new ControlUnit8b(cpu);
 
         public override void BuildInstructionSet() => cpu.instructionSet = new Dictionary<string, IInstruction>();
 
-        public override void BuildProgramCounter() => cpu.programCounter = new ProgramCounter8b(cpu.cpuBus);
+        public override void BuildProgramCounter() => cpu.programCounter = new ProgramCounter8b(cpu.cpuBus, cpu);
 
         public override void BuildRegisters() => cpu.registers = new Dictionary<int, Register>();
 
