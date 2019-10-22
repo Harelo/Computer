@@ -33,14 +33,15 @@ namespace Computer.EightBitCPU
             cpuBus = _cpuBus;
             flags = new BitArray(4, false);
             InputB = new Register(8, cpuBus, output);
+            InputB.enableToBus = true;
         }
 
         //Operations the ALU can perform
 
-        public void OR() => output = cpuBus.Or(InputB.enableToInput());
-        public void AND() => output = cpuBus.And(InputB.enableToInput());
+        public void OR() => output = cpuBus.Or(InputB.outputBus);
+        public void AND() => output = cpuBus.And(InputB.outputBus);
         public void NOT() => output = cpuBus.Not();
-        public void XOR() => output = cpuBus.Xor(InputB.enableToInput());
+        public void XOR() => output = cpuBus.Xor(InputB.outputBus);
         public void SHR() => output = cpuBus.RightShift(1);
         public void SHL() => output = cpuBus.LeftShift(1);
         public void ROR(int c) => output = cpuBus.RightShift(c);

@@ -9,15 +9,15 @@ namespace Computer.Components
         /// <summary>
         /// The actual binary number stored in the Register
         /// </summary>
-        private BitArray bits { get; set; }
+        private BitArray bits;
 
         /// <summary>
-        /// The bus from which the register will receive data when enable is on
+        /// The bus from which the register will receive data when set is on
         /// </summary>
         public BitArray inputBus { get; set; }
 
         /// <summary>
-        /// The bus to which the register will output values when set is on
+        /// The bus to which the register will output values when enable is on
         /// </summary>
         public BitArray outputBus { get; set; }
 
@@ -32,7 +32,8 @@ namespace Computer.Components
             set
             {
                 bits[i] = value;
-                updateOutputBus();
+                if (enableToBus)
+                    outputBus[i] = bits[i];
             }
         }
 
@@ -49,7 +50,7 @@ namespace Computer.Components
             {
                 _enable = value;
                 if (value)
-                    outputBus = bits;
+                    UpdateOutputBus();
             }
             get => _enable;
         }
@@ -73,20 +74,6 @@ namespace Computer.Components
         /// Returns the amount of bits the register has
         /// </summary>
         public int Count => bits.Count;
-
-        /// <summary>
-        /// Allows enable wire for inputs
-        /// </summary>
-        /// <returns></returns>
-        public BitArray enableToInput() => bits;
-
-        /// <summary>
-        /// Updates the output bus on any changes in the register value
-        /// </summary>
-        public void updateOutputBus()
-        {
-            outputBus = bits;
-        }
 
         /// <summary>
         /// Construct a register with a specific amount of bits
@@ -131,7 +118,6 @@ namespace Computer.Components
         {
             inputBus = _inputBus;
             outputBus = _outputBus;
-            updateOutputBus();
         }
 
         //Options for setting the value of the register
@@ -139,26 +125,39 @@ namespace Computer.Components
         public void SetValue(byte[] binaryNumber)
         {
             bits = new BitArray(binaryNumber);
-            updateOutputBus();
+            if (enableToBus)
+                UpdateOutputBus();
         }
 
         public void SetValue(int binaryNumber)
         {
             bits = new BitArray(new[] { binaryNumber });
-            updateOutputBus();
+            if (enableToBus)
+                UpdateOutputBus();
         }
 
         public void SetValue(long binaryNumber)
         {
             byte[] bytes = BitConverter.GetBytes(binaryNumber);
             bits = new BitArray(bytes);
-            updateOutputBus();
+            if (enableToBus)
+                UpdateOutputBus();
         }
 
         public void SetValue(BitArray binaryNumber)
         {
             bits = binaryNumber;
-            updateOutputBus();
+            if (enableToBus)
+                UpdateOutputBus();
+        }
+
+        /// <summary>
+        /// Updates output bus bit by bit so to not over-write the reference to the output bus
+        /// </summary>
+        private void UpdateOutputBus()
+        {
+            for (int i = 0; i < outputBus.Length; i++)
+                outputBus[i] = bits[i];
         }
 
         //public static implicit operator Register(byte[] binaryNumber)

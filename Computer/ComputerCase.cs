@@ -1,18 +1,15 @@
 ﻿using Computer.Components;
-using Computer.EightBitCPU;
-using Computer.Helpers;
+using System;
 using System.Collections;
-using System.ComponentModel;
-
 namespace Computer
 {
     public class ComputerCase
     {
         public static void Main()
         {
-            CPUShop shop = new CPUShop();
-            CPU8bBuilder builder = new CPU8bBuilder();
-            VonNeumannCPU cpu = shop.Construct(builder);
+            BitArray i = new BitArray(8, false);
+            BitArray o = new BitArray(8, false);
+            Register r = new Register(8, i, o);
         }
     }
 }
