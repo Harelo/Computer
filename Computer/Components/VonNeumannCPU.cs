@@ -1,6 +1,7 @@
 ﻿using Computer.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Computer.Components
 {
@@ -14,7 +15,6 @@ namespace Computer.Components
         public Dictionary<string, IInstruction> instructionSet { get; set; }
         public IALU alu { get; set; }
         public IProgramCounter programCounter { get; set; }
-
-        public BitArray cpuBus;
+        public BitArray cpuBus { get; set; }
     }
 }

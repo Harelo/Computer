@@ -84,5 +84,7 @@ namespace Computer.Components
 
             return new Register(registerBits);
         }
+
+        public static implicit operator Register(BitArray binaryNumber) => new Register(binaryNumber);
     }
 }

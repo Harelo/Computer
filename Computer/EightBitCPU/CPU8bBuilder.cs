@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace Computer.EightBitCPU
 {
-    public partial class CPU8bBuilder : CPUBuilder
+    public class CPU8bBuilder : CPUBuilder
     {
         public CPU8bBuilder()
         {
