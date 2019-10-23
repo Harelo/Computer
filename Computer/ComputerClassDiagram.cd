@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Computer.Components.CPUComponent">
+    <Position X="8" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEIAAAAAAAAA=</HashCode>
+      <FileName>Components\CPUComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Computer.EightBitCPU.ALU8b">
+    <Position X="5.75" Y="12" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEAAAQAAACgggoAAAACAAAAAEAgIAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>EightBitCPU\ALU8b.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="Computer.EightBitCPU.ControlUnit8b">
+    <Position X="8" Y="12" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAQAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>EightBitCPU\ControlUnit8b.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Computer.EightBitCPU.ProgramCounter8b">
+    <Position X="10.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAA=</HashCode>
+      <FileName>EightBitCPU\ProgramCounter8b.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Computer.Components.VonNeumannCPU">
+    <Position X="8" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACABAQAAAAAAAAEQAAAACAAAA=</HashCode>
+      <FileName>Components\VonNeumannCPU.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Computer.Components.Register">
+    <Position X="5.75" Y="6.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAQCBAAgAAAEABAAAAAAAAAAAAEAAAAgAAAAAAAA=</HashCode>
+      <FileName>Components\Register.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Computer.EightBitCPU.CPU8bBuilder">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAQAAgAAQAAAAAAAAAAAAACAAAAQAAAA=</HashCode>
+      <FileName>EightBitCPU\CPU8bBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Computer.Helpers.CPUBuilder">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAQAAgAAQAAAAAAAAAAAAAKAAAAQAAAA=</HashCode>
+      <FileName>Helpers\CPUBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Computer.Bus">
+    <Position X="10" Y="6.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="Computer.Bus.BusUpdateHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Helpers\Bus.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAACAEAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Bus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

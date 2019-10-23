@@ -7,7 +7,7 @@ namespace Computer.EightBitCPU
     public class ALU8b : CPUComponent, IALU
     {
         /// <summary>
-        /// The outputBus.busValue of the ALU
+        /// The outputBus of the ALU
         /// </summary>
         private Bus outputBus;
 
