@@ -15,6 +15,6 @@ namespace Computer.Components
         public Dictionary<string, IInstruction> instructionSet { get; set; }
         public IALU alu { get; set; }
         public IProgramCounter programCounter { get; set; }
-        public BitArray cpuBus { get; set; }
+        public Bus cpuBus { get; set; }
     }
 }

@@ -11,8 +11,8 @@ namespace Computer.Components
         /// A reference to the CPU bus
         /// </summary>
 
-        private BitArray _cpuBus;
-        protected BitArray cpuBus
+        private Bus _cpuBus;
+        protected Bus cpuBus
         {
             get => _cpuBus;
             set

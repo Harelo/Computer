@@ -9,77 +9,49 @@ namespace Computer.Components
         /// <summary>
         /// The actual binary number stored in the Register
         /// </summary>
-        private BitArray bits;
+        private BitArray bits { get; set; }
 
         /// <summary>
         /// The bus from which the register will receive data when set is on
         /// </summary>
-        public BitArray inputBus { get; set; }
+        private Bus inputBus { get; set; }
 
         /// <summary>
         /// The bus to which the register will output values when enable is on
         /// </summary>
-        public BitArray outputBus { get; set; }
+        private Bus outputBus { get; set; }
 
-        /// <summary>
-        /// An indexer for the register
-        /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public bool this[int i]
-        {
-            get => bits[i];
-            set
-            {
-                bits[i] = value;
-                if (enableToBus)
-                    outputBus[i] = bits[i];
-            }
-        }
 
         //Wires for setting and retrieving values from the register
-        private bool _enable, _set;
-
-        /// <summary>
-        /// Allows getting a value from the register
-        /// </summary>
-        /// <returns></returns>
+        private bool etb;
         public bool enableToBus
         {
+            get => etb;
             set
             {
-                _enable = value;
+                etb = value;
                 if (value)
-                    UpdateOutputBus();
+                    outputBus.busValue = new BitArray(bits);
             }
-            get => _enable;
         }
 
-        /// <summary>
-        /// Allows setting a value to the register
-        /// </summary>
+        private bool sfb;
         public bool setFromBus
         {
+            get => sfb;
             set
             {
-                _set = value;
+                sfb = value;
                 if (value)
-                    bits = inputBus;
+                    bits = new BitArray(inputBus.busValue);
             }
-            get => _set;
         }
-
-
-        /// <summary>
-        /// Returns the amount of bits the register has
-        /// </summary>
-        public int Count => bits.Count;
 
         /// <summary>
         /// Construct a register with a specific amount of bits
         /// </summary>
         /// <param name="bitAmount">The amount of bits the register will have</param>
-        public Register(int bitAmount, BitArray _inputBus, BitArray _outputBus)
+        public Register(int bitAmount, Bus _inputBus, Bus _outputBus)
         {
             bits = new BitArray(bitAmount);
 
@@ -89,11 +61,19 @@ namespace Computer.Components
             setBuses(_inputBus, _outputBus);
         }
 
+        public Register(long bitAmount, Bus _inputBus, Bus _outputBus)
+        {
+            byte[] bytes = BitConverter.GetBytes(bitAmount);
+            bits = new BitArray(bytes);
+
+            setBuses(_inputBus, _outputBus);
+        }
+
         /// <summary>
         /// Construct a register with an existing BitArray
         /// </summary>
         /// <param name="bitArray"></param>
-        public Register(BitArray bitArray, BitArray _inputBus, BitArray _outputBus)
+        public Register(BitArray bitArray, Bus _inputBus, Bus _outputBus)
         {
             bits = bitArray;
             setBuses(_inputBus, _outputBus);
@@ -103,7 +83,7 @@ namespace Computer.Components
         /// Construct a register from an existing byte array
         /// </summary>
         /// <param name="bitArray"></param>
-        public Register(byte[] bitArray, BitArray _inputBus, BitArray _outputBus)
+        public Register(byte[] bitArray, Bus _inputBus, Bus _outputBus)
         {
             bits = new BitArray(bitArray);
             setBuses(_inputBus, _outputBus);
@@ -114,51 +94,49 @@ namespace Computer.Components
         /// </summary>
         /// <param name="_inputBus"></param>
         /// <param name="_outputBus"></param>
-        private void setBuses(BitArray _inputBus, BitArray _outputBus)
+        private void setBuses(Bus _inputBus, Bus _outputBus)
         {
             inputBus = _inputBus;
             outputBus = _outputBus;
+
+            _inputBus.BusUpdateEvent += (n) =>
+            {
+                if (setFromBus)
+                    bits = new BitArray(n);
+                if (enableToBus)
+                    outputBus.busValue = new BitArray(bits);
+            };
         }
 
-        //Options for setting the value of the register
+        //Testing purposes methods from this point
 
-        public void SetValue(byte[] binaryNumber)
-        {
-            bits = new BitArray(binaryNumber);
-            if (enableToBus)
-                UpdateOutputBus();
-        }
 
-        public void SetValue(int binaryNumber)
-        {
-            bits = new BitArray(new[] { binaryNumber });
-            if (enableToBus)
-                UpdateOutputBus();
-        }
+        ///// <summary>
+        ///// Returns the amount of bits the register has
+        ///// </summary>
+        //public int Count => bits.Count;
+        ////Options for setting the value of the register
 
-        public void SetValue(long binaryNumber)
-        {
-            byte[] bytes = BitConverter.GetBytes(binaryNumber);
-            bits = new BitArray(bytes);
-            if (enableToBus)
-                UpdateOutputBus();
-        }
+        //public void SetValue(byte[] binaryNumber)
+        //{
+        //    bits = new BitArray(binaryNumber);
+        //}
 
-        public void SetValue(BitArray binaryNumber)
-        {
-            bits = binaryNumber;
-            if (enableToBus)
-                UpdateOutputBus();
-        }
+        //public void SetValue(int binaryNumber)
+        //{
+        //    bits = new BitArray(new[] { binaryNumber });
+        //}
 
-        /// <summary>
-        /// Updates output bus bit by bit so to not over-write the reference to the output bus
-        /// </summary>
-        private void UpdateOutputBus()
-        {
-            for (int i = 0; i < outputBus.Length; i++)
-                outputBus[i] = bits[i];
-        }
+        //public void SetValue(long binaryNumber)
+        //{
+        //    byte[] bytes = BitConverter.GetBytes(binaryNumber);
+        //    bits = new BitArray(bytes);
+        //}
+
+        //public void SetValue(BitArray binaryNumber)
+        //{
+        //    bits = binaryNumber;
+        //}
 
         //public static implicit operator Register(byte[] binaryNumber)
         //{

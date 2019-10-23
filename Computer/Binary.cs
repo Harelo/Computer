@@ -7,13 +7,12 @@ namespace Computer
 {
     public static class Binary
     {
-
-
         public static void PrintBA(BitArray bits)
         {
             Console.WriteLine();
             for (int i = bits.Length - 1; i >= 0; i--)
                 Console.Write(bits[i] == true ? 1 : 0);
+            Console.WriteLine();
         }
 
 

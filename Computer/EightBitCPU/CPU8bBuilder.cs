@@ -23,6 +23,6 @@ namespace Computer.EightBitCPU
 
         public override void BuildRegisters() => cpu.registers = new Dictionary<int, Register>();
 
-        public override void BuildCPUBus() => cpu.cpuBus = new BitArray(8, false);
+        public override void BuildCPUBus() => cpu.cpuBus = new Bus(8);
     }
 }
