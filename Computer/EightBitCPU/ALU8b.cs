@@ -57,6 +57,7 @@ namespace Computer.EightBitCPU
         public void ROR(int c) => outputBus.busValue = cpuBus.busValue.RightShift(c);
         public void LOR(int c) => outputBus.busValue = cpuBus.busValue.LeftShift(c);
 
+        //The add operation which is based on RCA binary addition
         public void ADD()
         {
             BitArray A = cpuBus.busValue;
