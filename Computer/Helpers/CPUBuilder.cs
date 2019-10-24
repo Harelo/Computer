@@ -18,7 +18,6 @@ namespace Computer.Helpers
         public abstract void BuildControlUnit();
         public abstract void BuildInstructionSet();
         public abstract void BuildALU();
-        public abstract void BuildProgramCounter();
         public abstract void BuildCPUBus();
     }
 }

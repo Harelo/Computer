@@ -19,14 +19,16 @@ namespace Computer.EightBitCPU
 
         public override void BuildInstructionSet() => cpu.instructionSet = new Dictionary<string, IInstruction>();
 
-        public override void BuildProgramCounter() => cpu.programCounter = new ProgramCounter8b(cpu.cpuBus, cpu);
 
         public override void BuildRegisters()
         {
-            cpu.registers = new Dictionary<int, Register>();
+            cpu.generalRegisters = new Dictionary<int, Register>();
 
             for (int i = 0; i < 4; i++)
-                cpu.registers[i] = new Register(8, cpu.cpuBus, cpu.cpuBus);
+                cpu.generalRegisters[i] = new Register(8, cpu.cpuBus, cpu.cpuBus);
+
+            cpu.MAR = new Register(8, cpu.cpuBus, cpu.cpuBus);
+            cpu.programCounter = new Register(8, cpu.cpuBus, cpu.cpuBus);
         }
 
         public override void BuildCPUBus() => cpu.cpuBus = new Bus(8);

@@ -16,7 +16,6 @@ namespace Computer.Helpers
             builder.BuildALU();
             builder.BuildControlUnit();
             builder.BuildInstructionSet();
-            builder.BuildProgramCounter();
             builder.BuildRegisters();
 
             return builder.cpu;

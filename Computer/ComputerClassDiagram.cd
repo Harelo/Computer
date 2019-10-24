@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Computer.EightBitCPU.ALU8b">
-    <Position X="5.75" Y="12" Width="1.5" />
+    <Position X="6.75" Y="12" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
@@ -19,21 +19,13 @@
     <Lollipop Position="0.1" />
   </Class>
   <Class Name="Computer.EightBitCPU.ControlUnit8b">
-    <Position X="8" Y="12" Width="1.5" />
+    <Position X="9.25" Y="12" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAQAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>EightBitCPU\ControlUnit8b.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Computer.EightBitCPU.ProgramCounter8b">
-    <Position X="10.25" Y="12" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAA=</HashCode>
-      <FileName>EightBitCPU\ProgramCounter8b.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
