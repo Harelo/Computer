@@ -12,16 +12,22 @@ namespace Computer.Components
         /// </summary>
         public Dictionary<int, BitArray> addreses;
 
+        private Bus ioBus;
+
         /// <summary>
         /// Initializes RAM with <paramref name="initialSize"/> size. All addreses will have a default value of 0
         /// </summary>
         /// <param name="initialSize">The memory size with which to initialize the RAM</param>
-        public RAM(int initialSize)
+        public RAM(int initialSize, Bus _ioBus)
         {
             addreses = new Dictionary<int, BitArray>();
 
             for (int i = 0; i < initialSize; i++)
                 addreses[i] = new BitArray(8, false);
+
+            ioBus = _ioBus;
+
+            _ioBus.BusUpdateEvent += (n) => ioBus.busValue = n;
         }
 
         /// <summary>

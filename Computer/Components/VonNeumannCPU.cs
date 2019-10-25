@@ -13,7 +13,7 @@ namespace Computer.Components
         //Registers below
 
         //Registers used for general purposes
-        public Dictionary<int, Register> generalRegisters { get; set; }
+        public Dictionary<int, Register> generalPurposeRegisters { get; set; }
 
         //A special register used for storing the next instruction to be executed
         public Register programCounter { get; set; }

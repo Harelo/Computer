@@ -1,4 +1,6 @@
 ﻿using Computer.Components;
+using Computer.EightBitCPU;
+using Computer.Helpers;
 using System;
 using System.Collections;
 namespace Computer

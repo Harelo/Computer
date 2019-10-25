@@ -1,5 +1,7 @@
 ﻿using Computer.Components;
+using Computer.Helpers;
 using Computer.Interfaces;
+using System;
 using System.Collections;
 
 namespace Computer.EightBitCPU
@@ -57,8 +59,64 @@ namespace Computer.EightBitCPU
         public void ROR(int c) => outputBus.busValue = cpuBus.busValue.RightShift(c);
         public void LOR(int c) => outputBus.busValue = cpuBus.busValue.LeftShift(c);
 
+        //One bit ripple carry adder used for ADD calculations
+        private class OneBitRCA
+        {
+            public bool sum { get; set; }
+
+            public bool Calculate(bool A, bool B, bool carryIn)
+            {
+                bool xor1 = A ^ B;
+                bool carry1 = A & B;
+                bool carry2 = xor1 & carryIn;
+                bool cout = carry1 | carry2;
+                sum = carryIn ^ xor1;
+
+                return cout;
+            }
+        }
+
         //The add operation which is based on RCA binary addition
         public void ADD()
+        {
+            int bitAmount = cpuBus.busValue.Length;
+            OneBitRCA[] rcas = new OneBitRCA[bitAmount];
+            BitArray result = new BitArray(bitAmount, false);
+            bool cin = false;
+
+            for (int i = 0; i < rcas.Length; i++)
+            {
+                rcas[i] = new OneBitRCA();
+                cin = rcas[i].Calculate(cpuBus.busValue[i], InputB[i], cin);
+                result[i] = rcas[i].sum;
+            }
+
+            outputBus.busValue = result;
+        }
+
+        public void CMP()
+        {
+            int bitAmount = cpuBus.busValue.Length;
+            bool aLarger = false, equalAbove = true, A, B, xor, and, not;
+
+            for (int i = bitAmount; i >= 0; i--)
+            {
+                A = cpuBus.busValue[i];
+                B = InputB[i];
+
+                xor = A ^ B;
+                and = A & equalAbove & xor;
+                not = !xor;
+                equalAbove = not & equalAbove;
+                aLarger = aLarger | and;
+            }
+        }
+
+
+
+
+        [Obsolete("Use ADD instead")]
+        public void OldAdd()
         {
             BitArray A = cpuBus.busValue;
             BitArray B = InputB;

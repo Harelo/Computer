@@ -22,10 +22,10 @@ namespace Computer.EightBitCPU
 
         public override void BuildRegisters()
         {
-            cpu.generalRegisters = new Dictionary<int, Register>();
+            cpu.generalPurposeRegisters = new Dictionary<int, Register>();
 
             for (int i = 0; i < 4; i++)
-                cpu.generalRegisters[i] = new Register(8, cpu.cpuBus, cpu.cpuBus);
+                cpu.generalPurposeRegisters[i] = new Register(8, cpu.cpuBus, cpu.cpuBus);
 
             cpu.MAR = new Register(8, cpu.cpuBus, cpu.cpuBus);
             cpu.programCounter = new Register(8, cpu.cpuBus, cpu.cpuBus);
