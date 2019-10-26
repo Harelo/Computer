@@ -9,11 +9,15 @@
   </Class>
   <Class Name="Computer.EightBitCPU.ALU8b">
     <Position X="6.75" Y="12" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+    <NestedTypes>
+      <Class Name="Computer.EightBitCPU.ALU8b.OneBitRCA" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>EightBitCPU\ALU8b.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AEAAAQAAACgggoAAAACAAAAAEAgIAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AEAAAQAAACgggoAAAECAAAAAEAgIAAAAAAAAAAAAEAQ=</HashCode>
       <FileName>EightBitCPU\ALU8b.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.1" />
@@ -32,7 +36,7 @@
   <Class Name="Computer.Components.VonNeumannCPU">
     <Position X="8" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAACABAQAAAAAAAAEQAAAACAAAA=</HashCode>
+      <HashCode>AAAAABIAAAAAAAAAAAACABAQAAAAAAAAEAAAAACAAAA=</HashCode>
       <FileName>Components\VonNeumannCPU.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -49,14 +53,14 @@
   <Class Name="Computer.EightBitCPU.CPU8bBuilder">
     <Position X="8" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAAAQAAgAAQAAAAAAAAAAAAACAAAAQAAAA=</HashCode>
+      <HashCode>AAAAAAIAAAAAAQAAAAAQAAAAAAAAAAAAACAAAAQAAAA=</HashCode>
       <FileName>EightBitCPU\CPU8bBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Computer.Helpers.CPUBuilder">
     <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAAAQAAgAAQAAAAAAAAAAAAAKAAAAQAAAA=</HashCode>
+      <HashCode>AAAAAAIAAAAAAQAAAAAQAAAAAAAAAAAAAKAAAAQAAAA=</HashCode>
       <FileName>Helpers\CPUBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>

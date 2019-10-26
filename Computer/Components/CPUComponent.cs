@@ -1,26 +1,29 @@
-﻿using System;
+﻿using Computer.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Computer.Components
 {
-    public abstract class CPUComponent
+    public abstract class CPUComponent : IBussed
     {
         /// <summary>
         /// A reference to the CPU bus
         /// </summary>
 
         private Bus _cpuBus;
-        protected Bus cpuBus
+        public Bus inputBus
         {
             get => _cpuBus;
-            set
+            protected set
             {
                 _cpuBus = value;
                 cpu.cpuBus = value;
             }
         }
+
+        public Bus outputBus { protected set; get; }
 
         private VonNeumannCPU cpu;
         public CPUComponent(VonNeumannCPU _cpu)

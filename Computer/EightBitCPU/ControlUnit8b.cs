@@ -13,7 +13,7 @@ namespace Computer.EightBitCPU
         public ControlUnit8b(VonNeumannCPU _cpu) : base(_cpu)
         {
             cpu = _cpu;
-            cpuBus = cpu.cpuBus;
+            inputBus = cpu.cpuBus;
         }
 
         /// <summary>

@@ -35,29 +35,49 @@ namespace Computer.EightBitCPU
         /// <param name="_cpuBus">The CPU's bus reference to be held by the ALU</param>
         public ALU8b(Bus _cpuBus, VonNeumannCPU cpu) : base(cpu)
         {
-            cpuBus = _cpuBus;
+            inputBus = _cpuBus;
 
             outputBus = new Bus(8);
 
             flags = new BitArray(4, false);
 
-            InputBRegister = new Register(8, cpuBus, outputBus);
+            InputBRegister = new Register(8, inputBus, outputBus);
             InputBRegister.enableToBus = true;
 
-            aluRegister = new Register(8, outputBus, cpuBus);
+            aluRegister = new Register(8, outputBus, inputBus);
 
             outputBus.BusUpdateEvent += (n) => InputB = new BitArray(n);
         }
 
         //Operations the ALU can perform
-        public void OR() => outputBus.busValue = cpuBus.busValue.Or(InputB);
-        public void AND() => outputBus.busValue = cpuBus.busValue.And(InputB);
-        public void NOT() => outputBus.busValue = cpuBus.busValue.Not();
-        public void XOR() => outputBus.busValue = cpuBus.busValue.Xor(InputB);
-        public void SHR() => outputBus.busValue = cpuBus.busValue.RightShift(1);
-        public void SHL() => outputBus.busValue = cpuBus.busValue.LeftShift(1);
-        public void ROR(int c) => outputBus.busValue = cpuBus.busValue.RightShift(c);
-        public void LOR(int c) => outputBus.busValue = cpuBus.busValue.LeftShift(c);
+        public BitArray OR => inputBus.busValue.Or(InputB);
+        public BitArray AND => inputBus.busValue.And(InputB);
+        public BitArray NOT => inputBus.busValue.Not();
+        public BitArray XOR
+        {
+            get
+            {
+                int bitAmount = inputBus.busValue.Length;
+                bool aLarger = false, equalAbove = true, A, B, xor, and, not;
+
+                for (int i = bitAmount; i >= 0; i--)
+                {
+                    A = inputBus.busValue[i];
+                    B = InputB[i];
+
+                    xor = A ^ B;
+                    and = A & equalAbove & xor;
+                    not = !xor;
+                    equalAbove = not & equalAbove;
+                    aLarger = aLarger | and;
+                }
+
+                return inputBus.busValue.Xor(InputB);
+            }
+        }
+
+        public BitArray SHR => inputBus.busValue.RightShift(1);
+        public BitArray SHL => inputBus.busValue.LeftShift(1);
 
         //One bit ripple carry adder used for ADD calculations
         private class OneBitRCA
@@ -77,38 +97,23 @@ namespace Computer.EightBitCPU
         }
 
         //The add operation which is based on RCA binary addition
-        public void ADD()
+        public BitArray ADD
         {
-            int bitAmount = cpuBus.busValue.Length;
-            OneBitRCA[] rcas = new OneBitRCA[bitAmount];
-            BitArray result = new BitArray(bitAmount, false);
-            bool cin = false;
-
-            for (int i = 0; i < rcas.Length; i++)
+            get
             {
-                rcas[i] = new OneBitRCA();
-                cin = rcas[i].Calculate(cpuBus.busValue[i], InputB[i], cin);
-                result[i] = rcas[i].sum;
-            }
+                int bitAmount = inputBus.busValue.Length;
+                OneBitRCA[] rcas = new OneBitRCA[bitAmount];
+                BitArray result = new BitArray(bitAmount, false);
+                bool cin = false;
 
-            outputBus.busValue = result;
-        }
+                for (int i = 0; i < rcas.Length; i++)
+                {
+                    rcas[i] = new OneBitRCA();
+                    cin = rcas[i].Calculate(inputBus.busValue[i], InputB[i], cin);
+                    result[i] = rcas[i].sum;
+                }
 
-        public void CMP()
-        {
-            int bitAmount = cpuBus.busValue.Length;
-            bool aLarger = false, equalAbove = true, A, B, xor, and, not;
-
-            for (int i = bitAmount; i >= 0; i--)
-            {
-                A = cpuBus.busValue[i];
-                B = InputB[i];
-
-                xor = A ^ B;
-                and = A & equalAbove & xor;
-                not = !xor;
-                equalAbove = not & equalAbove;
-                aLarger = aLarger | and;
+                return result;
             }
         }
 
@@ -118,7 +123,7 @@ namespace Computer.EightBitCPU
         [Obsolete("Use ADD instead")]
         public void OldAdd()
         {
-            BitArray A = cpuBus.busValue;
+            BitArray A = inputBus.busValue;
             BitArray B = InputB;
 
             var cin = new BitArray(A.Length + 1);
